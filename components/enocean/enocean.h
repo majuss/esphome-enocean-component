@@ -2,7 +2,7 @@
 
 #include "esphome/core/component.h"
 #include "esphome/core/automation.h"
-#include "esphome/components/binary_sensor/binary_sensor.h"
+// #include "esphome/components/binary_sensor/binary_sensor.h"
 #include "esphome/components/uart/uart.h"
 
 namespace esphome::enocean {
