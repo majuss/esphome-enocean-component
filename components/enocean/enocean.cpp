@@ -1,7 +1,7 @@
 #include "enocean.h"
 #include "esphome/core/log.h"
 #include <enocean.h>
-// #include "binary_sensor/enocean_binary_sensor.h"
+#include "binary_sensor/enocean_binary_sensor.h"
 
 #define ENOCEAN_HEADER 4
 #define ENOCEAN_MAX_DATA 40
@@ -62,34 +62,53 @@ void Enocean::loop() {
         packet.handleTelegram();
       }
 
-      ESP_LOGD(TAG, "%s", packet.getState().c_str());
-
       ESP_LOGD(TAG, "Packet sender: %d %d %d %d", packet.getSenderAddress()[0], packet.getSenderAddress()[1],
                packet.getSenderAddress()[2], packet.getSenderAddress()[3]);
 
       for (auto sensor : enocean_binary_sensor_) {
-        if (0 == memcmp(sensor->get_address(), packet.getSenderAddress(), 4)) {
-          if (sensor->get_type() == packet.getType()) {
-            ESP_LOGD(TAG, "Found sensor %s", sensor->get_name());
-            bool const state = packet.getState() == "on";
-            sensor->publish_state(state);
+        ESP_LOGD(TAG, "packet type: %s, sender type: %s", packet.getType().c_str(), sensor->get_type().c_str());
 
-            break;
-          } else if (packet.getType() == "four_button_remote_off") {
+        if (0 == memcmp(sensor->get_address(), packet.getSenderAddress(), 4)) {
+          if (packet.getType() == "four_button_remote_off") {
             for (auto sensor : enocean_binary_sensor_) {
-              if (0 == memcmp(sensor->get_address(), packet.getSenderAddress(), 4)) {
-                bool const state = packet.getState() == "on";
-                sensor->publish_state(state);
-              }
+              bool const state = packet.getState() == "on";
+              sensor->publish_state(state);
             }
             break;
-          } else {
+          } else if (packet.getType() == "Unknown") {
             bool const state = packet.getState() == "on";
             sensor->publish_state(state);
             break;
+          } else if (strcmp(sensor->get_type().c_str(), packet.getType().c_str()) == 0) {
+            bool const state = packet.getState() == "on";
+            sensor->publish_state(state);
+            break;
+          } else if (packet.getType() == "window_handle") {
+            bool const state = packet.getState() == "on";
+            sensor->publish_state(state);
+            break;
+          } else {
+            // bool const state = packet.getState() == "on";
+            // sensor->publish_state(state);
           }
         }
       }
+
+      //         ESP_LOGD(TAG, "Found sensor %s", sensor->get_name());
+
+      //         // for (auto sensor : enocean_binary_sensor_) {
+      //         //   if (0 == memcmp(sensor->get_address(), packet.getSenderAddress(), 4)) {
+      //     }
+      //   }
+      //   break;
+      // } else {
+      //   bool const state = packet.getState() == "on";
+      //   ESP_LOGD(TAG, "no compatible sensor found just on");
+      //   sensor->publish_state(state);
+      //   break;
+      // }
+      //   }
+      // }
     }  // magic byte 0x55
   }  // whileserial available
 }  // function
