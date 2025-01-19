@@ -12,6 +12,8 @@ namespace esphome::enocean {
 
 class EnOceanBinarySensor;
 
+class EnOceanSensor;
+
 class Enocean : public PollingComponent, public uart::UARTDevice {
  public:
   float get_setup_priority() const override { return setup_priority::HARDWARE; }
@@ -25,11 +27,16 @@ class Enocean : public PollingComponent, public uart::UARTDevice {
     enocean_binary_sensor_.push_back(enocean_binary_sensor);
   }
 
+  void set_sensor(EnOceanSensor *enocean_sensor) {
+    enocean_sensor_.push_back(enocean_sensor)M
+  }
+
   void set_sensor_id(uint8_t sensor_id) { this->sensor_id_ = sensor_id; }
 
  protected:
   uint8_t sensor_id_{0};
   std::vector<EnOceanBinarySensor *> enocean_binary_sensor_{};
+  std::vector<EnOceanSensor *> enocean_sensor_{};
 };
 
 }  // namespace esphome::enocean

@@ -2,6 +2,7 @@
 #include "esphome/core/log.h"
 #include <enocean.h>
 #include "binary_sensor/enocean_binary_sensor.h"
+#include "sensor/enocean_sensor.h"
 
 #define ENOCEAN_HEADER 4
 #define ENOCEAN_MAX_DATA 40
@@ -59,6 +60,12 @@ void Enocean::loop() {
           ESP_LOGD(TAG, "Data CRC8 is invalid.");
           return;
         };
+        // if sensor is configured
+        for (auto sensor : enocean_sensor_){
+          if (strcmp(sensor->get_type().c_str(), "last_rssi") == 0){
+            sensor.publish_state(packet.rssi);
+          }
+        }
         packet.handleTelegram();
       }
 
