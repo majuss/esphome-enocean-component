@@ -2,7 +2,7 @@
 #include "esphome/core/log.h"
 #include <enocean.h>
 #include "binary_sensor/enocean_binary_sensor.h"
-#include "sensor/enocean_sensor.h"
+// #include "sensor/enocean_sensor.h"
 
 #define ENOCEAN_HEADER 4
 #define ENOCEAN_MAX_DATA 40
