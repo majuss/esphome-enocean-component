@@ -29,7 +29,7 @@ class Enocean : public PollingComponent, public uart::UARTDevice {
   }
 
   void set_sensor(EnOceanSensor *enocean_sensor) {
-    enocean_sensor_.push_back(enocean_sensor)M
+    enocean_sensor_.push_back(enocean_sensor);
   }
 
   void set_sensor_id(uint8_t sensor_id) { this->sensor_id_ = sensor_id; }
