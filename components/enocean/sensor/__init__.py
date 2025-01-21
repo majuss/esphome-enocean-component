@@ -31,7 +31,8 @@ async def to_code(config):
     await cg.register_component(var, config)
     parent = await cg.get_variable(config[CONF_ENOCEAN_ID])
     cg.add(var.set_enocean_parent(parent))
-    cg.add(var.set_address(config[CONF_ADDRESS]))
+    if CONF_ADDRESS in config:
+        cg.add(var.set_address(config[CONF_ADDRESS]))
     cg.add(parent.set_binary_sensor(var))
     if CONF_TYPE in config:
         cg.add(var.set_type(config[CONF_TYPE]))
