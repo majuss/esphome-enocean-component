@@ -3,7 +3,7 @@
 #include "esphome/core/component.h"
 #include "esphome/components/enocean/enocean.h"
 #include "esphome/components/sensor/sensor.h"
-#include "esphome/esphome.h"
+#include "esphome.h"
 
 namespace esphome::enocean {
 
