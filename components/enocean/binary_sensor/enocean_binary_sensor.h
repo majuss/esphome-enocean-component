@@ -17,7 +17,7 @@ class EnOceanBinarySensor : public binary_sensor::BinarySensor, public Component
 
   void set_address(std::array<uint8_t, 4> const &addr) { memcpy(address_, addr.data(), 4); }
   void set_type(String type) { this->type_ = type; }
-  void set_state(bool state) { this->state = state}
+  void set_state(bool state) { this->state = state; }
 
   uint8_t const *const get_address() const { return address_; }
 
