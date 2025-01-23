@@ -4,6 +4,7 @@ from esphome.components import uart
 from esphome.const import CONF_ID
 
 DEPENDENCIES = ["uart"]
+CODEOWNERS = ["@majuss"]
 
 CONF_ENOCEAN_ID = "enocean_id"
 enocean_ns = cg.esphome_ns.namespace("enocean")

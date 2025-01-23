@@ -6,7 +6,7 @@ from esphome.const import CONF_ADDRESS, CONF_TYPE
 from .. import enocean_ns, CONF_ENOCEAN_ID, Enocean
 
 DEPENDENCIES = ["enocean"]
-CODEOWNERS = ["@jesserockz"]
+CODEOWNERS = ["@majuss"]
 
 EnOceanBinarySensor = enocean_ns.class_(
     "EnOceanBinarySensor", binary_sensor.BinarySensor, cg.Component

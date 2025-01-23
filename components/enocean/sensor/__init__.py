@@ -6,7 +6,7 @@ from esphome.const import CONF_ADDRESS, CONF_TYPE
 from .. import enocean_ns, CONF_ENOCEAN_ID, Enocean
 
 DEPENDENCIES = ["enocean"]
-CODEOWNERS = ["@jesserockz"]
+CODEOWNERS = ["@majuss"]
 
 EnOceanSensor = enocean_ns.class_(
     "EnOceanSensor", sensor.Sensor, cg.Component
@@ -33,6 +33,6 @@ async def to_code(config):
     cg.add(var.set_enocean_parent(parent))
     if CONF_ADDRESS in config:
         cg.add(var.set_address(config[CONF_ADDRESS]))
-    cg.add(parent.set_binary_sensor(var))
+    cg.add(parent.set_sensor(var))
     if CONF_TYPE in config:
         cg.add(var.set_type(config[CONF_TYPE]))
