@@ -99,7 +99,7 @@ namespace esphome::enocean
               {
                 if (0 == memcmp(sensor->get_address(), packet.getSenderAddress(), 4))
                 {
-                  bool const state = packet.getState() == "on";
+                  bool const state = packet.getState() == 1;
                   sensor->publish_state(state);
                 }
               }
@@ -107,25 +107,25 @@ namespace esphome::enocean
             }
             else if (packet.getType() == "Unknown")
             {
-              bool const state = packet.getState() == "on";
+              bool const state = packet.getState() == 1;
               sensor->publish_state(state);
               break;
             }
             else if (strcmp(sensor->get_type().c_str(), packet.getType().c_str()) == 0)
             {
-              bool const state = packet.getState() == "on";
+              bool const state = packet.getState() == 1;
               sensor->publish_state(state);
               break;
             }
             else if (packet.getType() == "window_handle")
             {
-              bool const state = packet.getState() == "on";
+              bool const state = packet.getState() == 1;
               sensor->publish_state(state);
               break;
             }
             else
             {
-              // bool const state = packet.getState() == "on";
+              // bool const state = packet.getState() == 1;
               // sensor->publish_state(state);
             }
           }
@@ -139,7 +139,7 @@ namespace esphome::enocean
         //   }
         //   break;
         // } else {
-        //   bool const state = packet.getState() == "on";
+        //   bool const state = packet.getState() == 1;
         //   ESP_LOGD(TAG, "no compatible sensor found just on");
         //   sensor->publish_state(state);
         //   break;
