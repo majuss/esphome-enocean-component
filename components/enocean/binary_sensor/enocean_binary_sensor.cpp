@@ -6,7 +6,9 @@ namespace enocean {
 
 static const char *const TAG = "enocean.binary_sensor";
 
-void EnOceanBinarySensor::setup() {}
+void EnOceanBinarySensor::setup() {
+    this->publish_state(0);
+}
 
 void EnOceanBinarySensor::dump_config() { ESP_LOGCONFIG(TAG, "EnOcean Binary Sensor"); }
 
