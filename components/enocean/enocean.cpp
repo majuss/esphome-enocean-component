@@ -78,7 +78,7 @@ namespace esphome::enocean
           {
             if (strcmp(sensor->get_type().c_str(), "last_rssi") == 0)
             {
-              sensor.publish_state(packet.rssi);
+              sensor->publish_state(packet.getRssi());
             }
           }
           packet.handleTelegram();
