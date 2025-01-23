@@ -26,7 +26,7 @@ class EnOceanBinarySensor : public binary_sensor::BinarySensor, public Component
  protected:
   Enocean *parent_{nullptr};
   String type_{};
-  bool state;
+  bool state{0};
   uint8_t sensor_id_{0};
   uint8_t address_[4]{0};
 };

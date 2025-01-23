@@ -33,6 +33,6 @@ async def to_code(config):
     cg.add(var.set_enocean_parent(parent))
     cg.add(var.set_address(config[CONF_ADDRESS]))
     cg.add(parent.set_binary_sensor(var))
-    cg.add(var.set_state("off"))
+    cg.add(var.set_state(0))
     if CONF_TYPE in config:
         cg.add(var.set_type(config[CONF_TYPE]))
