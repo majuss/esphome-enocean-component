@@ -25,4 +25,4 @@ async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(var, config)
     await uart.register_uart_device(var, config)
-    cg.add_library("majuss/EnOcean", "1.1.3")
+    cg.add_library("majuss/EnOcean", "1.1.4")
