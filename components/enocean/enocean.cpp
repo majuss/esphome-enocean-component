@@ -58,7 +58,7 @@ namespace esphome::enocean
 
         if (packet.payloadLength + 1 <= available)
         {
-          Serial.println("read data");
+          ESP_LOGD(TAG, "read data");
 
           this->read_array(packet.enocean_data, packet.dataLength);
           this->read_array(packet.enocean_optional, packet.optionalLength);

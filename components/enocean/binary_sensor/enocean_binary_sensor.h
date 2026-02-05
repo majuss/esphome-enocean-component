@@ -3,7 +3,7 @@
 #include "esphome/core/component.h"
 #include "esphome/components/enocean/enocean.h"
 #include "esphome/components/binary_sensor/binary_sensor.h"
-#include "esphome.h"
+#include <string>
 
 namespace esphome::enocean {
 
@@ -16,16 +16,16 @@ class EnOceanBinarySensor : public binary_sensor::BinarySensor, public Component
   void set_enocean_parent(Enocean *parent) { this->parent_ = parent; }
 
   void set_address(std::array<uint8_t, 4> const &addr) { memcpy(address_, addr.data(), 4); }
-  void set_type(String type) { this->type_ = type; }
+  void set_type(const std::string &type) { this->type_ = type; }
   void set_state(bool state) { this->state = state; }
 
   uint8_t const *const get_address() const { return address_; }
 
-  String get_type() const { return type_; }
+  const std::string &get_type() const { return type_; }
 
  protected:
   Enocean *parent_{nullptr};
-  String type_{};
+  std::string type_{};
   bool state{0};
   uint8_t sensor_id_{0};
   uint8_t address_[4]{0};
